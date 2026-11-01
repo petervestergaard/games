@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f5f2e9">
+    <meta name="description" content="A quick, offline-friendly multiplication tables challenge.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Times Tables">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./icon-180.png">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Times Tables — The 100 Challenge</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Times Tables home">
+          <span class="brand-mark" aria-hidden="true">×</span>
+          <span>little big maths</span>
+        </a>
+        <span class="offline-label"><span class="offline-dot"></span>Ready anywhere</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">THE 100 CHALLENGE</p>
+        <h1 id="page-title">You vs.<br><span>the times tables.</span></h1>
+        <p class="intro-copy">Every multiplication from 1 × 1 to 10 × 10. How fast can you get them all?</p>
+      </section>
+
+      <section class="challenge-card" aria-label="Multiplication challenge">
+        <div class="game-topline">
+          <div class="timer-block">
+            <span class="stat-label">YOUR TIME</span>
+            <span id="timer" class="timer" aria-live="off">00:00.0</span>
+          </div>
+          <div class="progress-block">
+            <span class="stat-label">PROGRESS <span id="progress-count">0 / 100</span></span>
+            <div class="progress-track" role="progressbar" aria-label="Problems completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+              <span id="progress-fill"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-area">
+          <p id="game-message" class="game-message" aria-live="polite">Ready when you are.</p>
+          <div class="equation" aria-label="Your next multiplication problem">
+            <span id="factor-a">?</span>
+            <span class="multiply-sign" aria-hidden="true">×</span>
+            <span id="factor-b">?</span>
+            <span class="equals-sign" aria-hidden="true">=</span>
+            <span id="answer-placeholder" class="answer-placeholder">?</span>
+          </div>
+          <form id="answer-form" class="answer-form" autocomplete="off">
+            <label class="sr-only" for="answer-input">Your answer</label>
+            <input id="answer-input" type="number" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" placeholder="Type your answer" disabled>
+            <button id="submit-button" class="submit-button" type="submit" disabled aria-label="Check answer">↗</button>
+          </form>
+          <button id="start-button" class="start-button" type="button">Start the challenge <span aria-hidden="true">→</span></button>
+          <div id="result-panel" class="result-panel" hidden>
+            <span class="result-sparkle" aria-hidden="true">✦</span>
+            <span id="result-time" class="result-time"></span>
+            <span class="result-caption">All 100. Nicely done!</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <label for="player-name">PLAYER NAME</label>
+          <input id="player-name" type="text" maxlength="18" value="Player" autocomplete="nickname" aria-label="Player name for the leaderboard">
+          <span class="footer-note">Your best times stay on this device.</span>
+        </div>
+      </section>
+
+      <section class="leaderboard" aria-labelledby="leaderboard-title">
+        <div class="leaderboard-heading">
+          <div>
+            <p class="eyebrow">PERSONAL BESTS</p>
+            <h2 id="leaderboard-title">Hall of fame<span class="heading-period">.</span></h2>
+          </div>
+          <span class="local-badge"><span aria-hidden="true">◉</span> ON THIS DEVICE</span>
+        </div>
+        <div id="leaderboard-content"></div>
+      </section>
+
+      <footer class="page-footer">A little practice goes a long way. <span aria-hidden="true">✳</span></footer>
+    </main>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
