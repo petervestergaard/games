@@ -94,6 +94,7 @@ function showQuestion() {
   factorAElement.textContent = String(a);
   factorBElement.textContent = String(b);
   answerInput.value = "";
+  answerInput.classList.remove("is-wrong");
 }
 
 function startGame() {
@@ -171,6 +172,7 @@ answerForm.addEventListener("submit", (event) => {
   if (Number(answerInput.value) !== a * b) {
     messageElement.textContent = "Not quite — give it another try.";
     messageElement.className = "game-message is-wrong";
+    answerInput.classList.add("is-wrong");
     return;
   }
 
@@ -192,11 +194,15 @@ keypad.addEventListener("click", (event) => {
 
   if (button.dataset.action === "backspace") {
     answerInput.value = answerInput.value.slice(0, -1);
+    answerInput.classList.remove("is-wrong");
     return;
   }
 
   if (button.dataset.digit !== undefined) {
-    answerInput.value += button.dataset.digit;
+    answerInput.value = answerInput.classList.contains("is-wrong")
+      ? button.dataset.digit
+      : answerInput.value + button.dataset.digit;
+    answerInput.classList.remove("is-wrong");
   }
 });
 

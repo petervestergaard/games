@@ -209,6 +209,11 @@ button { -webkit-tap-highlight-color: transparent; }
   text-align: center;
   transition: border-color .15s, box-shadow .15s;
 }
+.answer-form input.is-wrong {
+  border-color: #d87861;
+  background: #fff3ef;
+  color: #b94f39;
+}
 .answer-form input::placeholder { color: #a5aaa1; font-family: "DM Sans", sans-serif; font-size: 12px; }
 .answer-form input:disabled { display: none; }
 .keypad {
