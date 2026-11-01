@@ -110,6 +110,7 @@ function startGame() {
   questionIndex = 0;
   isPlaying = true;
   startedAt = performance.now();
+  document.body.classList.add("game-mode");
   startButton.hidden = true;
   resultPanel.hidden = true;
   answerInput.disabled = false;
@@ -132,6 +133,7 @@ function updateTimer() {
 
 function finishGame() {
   isPlaying = false;
+  document.body.classList.remove("game-mode");
   cancelAnimationFrame(timerFrame);
   const elapsed = Math.round(performance.now() - startedAt);
   timerElement.textContent = formatTime(elapsed, true);

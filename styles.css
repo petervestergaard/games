@@ -398,9 +398,139 @@ button { -webkit-tap-highlight-color: transparent; }
   clip-path: inset(50%);
 }
 
+body.game-mode {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.game-mode .topbar,
+.game-mode .intro,
+.game-mode .timer-block,
+.game-mode .game-message,
+.game-mode .card-footer,
+.game-mode .leaderboard,
+.game-mode .page-footer {
+  display: none;
+}
+
+.game-mode .app-shell {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  flex-direction: column;
+  padding: max(10px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+}
+
+.game-mode .challenge-card {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.game-mode .game-topline {
+  display: block;
+  flex: 0 0 auto;
+  padding: 5px 0 8px;
+  border: 0;
+}
+
+.game-mode .progress-block {
+  gap: 7px;
+}
+
+.game-mode .stat-label {
+  font-size: 0;
+}
+
+.game-mode #progress-count {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.game-mode .progress-track {
+  height: clamp(10px, 1.6dvh, 15px);
+}
+
+.game-mode .question-area {
+  min-height: 0;
+  flex: 1;
+  justify-content: center;
+  gap: clamp(10px, 2dvh, 18px);
+  padding: 4px 0 0;
+}
+
+.game-mode .equation {
+  min-height: 0;
+  flex: 0 0 auto;
+  gap: clamp(12px, 4vw, 24px);
+  font-size: clamp(48px, 13vw, 76px);
+}
+
+.game-mode .answer-placeholder {
+  width: clamp(64px, 17vw, 82px);
+  height: clamp(64px, 17vw, 82px);
+  border-radius: 18px;
+  font-size: 40px;
+}
+
+.game-mode .answer-form {
+  width: min(100%, 520px);
+  min-height: 0;
+  flex: 0 1 auto;
+  display: grid;
+  align-items: stretch;
+  grid-template-rows: clamp(50px, 7dvh, 62px) minmax(0, min(52dvh, 460px));
+  gap: clamp(8px, 1.5dvh, 12px);
+  margin: 0;
+}
+
+.game-mode .answer-form input {
+  height: 100%;
+  border-radius: 14px;
+  font-size: 26px;
+}
+
+.game-mode .answer-form input::placeholder {
+  font-size: 14px;
+}
+
+.game-mode .keypad {
+  min-height: 0;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 1.5dvh, 14px);
+}
+
+.game-mode .keypad-key {
+  min-height: 0;
+  border-radius: 16px;
+  font-size: clamp(25px, 4dvh, 34px);
+}
+
+.game-mode .keypad-utility {
+  font-size: clamp(24px, 3.5dvh, 30px);
+}
+
+.game-mode .keypad-enter {
+  font-size: clamp(30px, 4.5dvh, 38px);
+}
+
 @media (min-width: 700px) {
   .app-shell { padding-top: 28px; }
   .intro { padding-top: 55px; }
+
+  .game-mode .app-shell {
+    padding: max(14px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  }
 }
 
 @media (max-width: 380px) {
