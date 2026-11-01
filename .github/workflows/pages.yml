@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Udgiv til GitHub Pages
 
 on:
   push:
@@ -21,14 +21,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Hent repository
         uses: actions/checkout@v4
-      - name: Configure GitHub Pages
+      - name: Konfigurer GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload site
+      - name: Upload websted
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      - name: Deploy site
+      - name: Udgiv websted
         id: deployment
         uses: actions/deploy-pages@v4

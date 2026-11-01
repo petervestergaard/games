@@ -29,7 +29,7 @@ function formatTime(milliseconds, tenths = false) {
   const minutes = Math.floor(totalTenths / 600);
   const seconds = Math.floor(totalTenths / 10) % 60;
   const fraction = totalTenths % 10;
-  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}${tenths ? `.${fraction}` : ""}`;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}${tenths ? `,${fraction}` : ""}`;
 }
 
 function getLeaderboard() {
@@ -44,7 +44,7 @@ function getLeaderboard() {
         )
       : [];
   } catch (error) {
-    console.error("Could not read the local leaderboard.", error);
+    console.error("Kunne ikke læse listen over bedste tider.", error);
     return [];
   }
 }
@@ -55,7 +55,7 @@ function renderLeaderboard() {
     .slice(0, 10);
 
   if (records.length === 0) {
-    leaderboardContent.innerHTML = '<div class="empty-leaderboard">Your first finish earns a spot here.<br>Ready to make the list?</div>';
+    leaderboardContent.innerHTML = '<div class="empty-leaderboard">Din første gennemførte runde giver dig en plads her.<br>Klar til at komme på listen?</div>';
     return;
   }
 
@@ -72,7 +72,7 @@ function renderLeaderboard() {
     const name = document.createElement("strong");
     name.textContent = record.name;
     const date = document.createElement("span");
-    date.textContent = new Date(record.date).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    date.textContent = new Date(record.date).toLocaleDateString("da-DK", { month: "short", day: "numeric" });
     player.append(name, date);
     const time = document.createElement("span");
     time.className = "record-time";
@@ -116,7 +116,7 @@ function startGame() {
   keypad.querySelectorAll("button").forEach((button) => { button.disabled = false; });
   submitButton.disabled = false;
   playerNameInput.disabled = true;
-  messageElement.textContent = "Solve it, then hit enter.";
+  messageElement.textContent = "Løs stykket, og tryk på enterknappen.";
   messageElement.className = "game-message";
   timerElement.textContent = "00:00.0";
   setProgress(0);
@@ -143,11 +143,11 @@ function finishGame() {
   playerNameInput.disabled = false;
   startButton.textContent = "Play again";
   startButton.hidden = false;
-  messageElement.textContent = "Challenge complete!";
+  messageElement.textContent = "Udfordringen er klaret!";
   messageElement.className = "game-message is-correct";
 
   const record = {
-    name: playerNameInput.value.trim().slice(0, 18) || "Player",
+    name: playerNameInput.value.trim().slice(0, 18) || "Spiller",
     time: elapsed,
     date: new Date().toISOString(),
   };
@@ -158,8 +158,8 @@ function finishGame() {
     localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(records));
     renderLeaderboard();
   } catch (error) {
-    console.error("Could not save your result to the local leaderboard.", error);
-    messageElement.textContent = "Finished! Your time could not be saved on this device.";
+    console.error("Kunne ikke gemme dit resultat på listen over bedste tider.", error);
+    messageElement.textContent = "Færdig! Din tid kunne ikke gemmes på denne enhed.";
     messageElement.className = "game-message is-wrong";
   }
 }
@@ -170,7 +170,7 @@ answerForm.addEventListener("submit", (event) => {
 
   const [a, b] = questions[questionIndex];
   if (Number(answerInput.value) !== a * b) {
-    messageElement.textContent = "Not quite — give it another try.";
+    messageElement.textContent = "Ikke helt – prøv igen.";
     messageElement.className = "game-message is-wrong";
     answerInput.classList.add("is-wrong");
     return;
@@ -183,7 +183,7 @@ answerForm.addEventListener("submit", (event) => {
     return;
   }
 
-  messageElement.textContent = "That's it! Keep going.";
+  messageElement.textContent = "Lige præcis! Fortsæt sådan.";
   messageElement.className = "game-message is-correct";
   showQuestion();
 });

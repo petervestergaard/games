@@ -1,8 +1,9 @@
 {
   "id": "./",
-  "name": "Times Tables — The 100 Challenge",
-  "short_name": "Times Tables",
-  "description": "Practise every multiplication from 1 × 1 to 10 × 10 and beat your best time.",
+  "lang": "da",
+  "name": "Gangetabeller – 100-opgaven",
+  "short_name": "Gangetabeller",
+  "description": "Øv alle gangestykker fra 1 × 1 til 10 × 10, og slå din bedste tid.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
