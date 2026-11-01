@@ -105,6 +105,7 @@ button { -webkit-tap-highlight-color: transparent; }
   background: #fffefa;
   box-shadow: 0 12px 35px rgba(44, 50, 39, .07);
 }
+.cancel-game-button { display: none; }
 .game-topline {
   justify-content: space-between;
   gap: 25px;
@@ -440,8 +441,35 @@ body.game-mode {
 .game-mode .game-topline {
   display: block;
   flex: 0 0 auto;
-  padding: 5px 0 8px;
+  padding: 5px 48px 8px 0;
   border: 0;
+}
+
+.game-mode .cancel-game-button {
+  position: fixed;
+  z-index: 1;
+  top: max(8px, env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  padding: 0 0 3px;
+  border: 1px solid rgba(192, 65, 55, .18);
+  border-radius: 50%;
+  background: #fae7e2;
+  color: #c4453b;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.game-mode .cancel-game-button:active {
+  transform: scale(.92);
+  background: #f3d4ce;
 }
 
 .game-mode .progress-block {

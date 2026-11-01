@@ -13,6 +13,7 @@ const answerForm = document.querySelector("#answer-form");
 const submitButton = document.querySelector("#submit-button");
 const keypad = document.querySelector(".keypad");
 const startButton = document.querySelector("#start-button");
+const cancelGameButton = document.querySelector("#cancel-game-button");
 const playerNameInput = document.querySelector("#player-name");
 const resultPanel = document.querySelector("#result-panel");
 const resultTime = document.querySelector("#result-time");
@@ -143,7 +144,7 @@ function finishGame() {
   keypad.querySelectorAll("button").forEach((button) => { button.disabled = true; });
   submitButton.disabled = true;
   playerNameInput.disabled = false;
-  startButton.textContent = "Play again";
+  startButton.textContent = "Spil igen";
   startButton.hidden = false;
   messageElement.textContent = "Udfordringen er klaret!";
   messageElement.className = "game-message is-correct";
@@ -164,6 +165,30 @@ function finishGame() {
     messageElement.textContent = "Færdig! Din tid kunne ikke gemmes på denne enhed.";
     messageElement.className = "game-message is-wrong";
   }
+}
+
+function cancelGame() {
+  if (!isPlaying) return;
+
+  isPlaying = false;
+  cancelAnimationFrame(timerFrame);
+  document.body.classList.remove("game-mode");
+  questions = [];
+  questionIndex = 0;
+  factorAElement.textContent = "?";
+  factorBElement.textContent = "?";
+  answerInput.value = "";
+  answerInput.classList.remove("is-wrong");
+  answerInput.disabled = true;
+  keypad.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+  playerNameInput.disabled = false;
+  timerElement.textContent = "00:00,0";
+  setProgress(0);
+  messageElement.textContent = "Klar, når du er.";
+  messageElement.className = "game-message";
+  resultPanel.hidden = true;
+  startButton.innerHTML = 'Start udfordringen <span aria-hidden="true">→</span>';
+  startButton.hidden = false;
 }
 
 answerForm.addEventListener("submit", (event) => {
@@ -189,6 +214,8 @@ answerForm.addEventListener("submit", (event) => {
   messageElement.className = "game-message is-correct";
   showQuestion();
 });
+
+cancelGameButton.addEventListener("click", cancelGame);
 
 keypad.addEventListener("click", (event) => {
   const button = event.target.closest("button");
