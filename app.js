@@ -11,6 +11,7 @@ const factorBElement = document.querySelector("#factor-b");
 const answerInput = document.querySelector("#answer-input");
 const answerForm = document.querySelector("#answer-form");
 const submitButton = document.querySelector("#submit-button");
+const keypad = document.querySelector(".keypad");
 const startButton = document.querySelector("#start-button");
 const playerNameInput = document.querySelector("#player-name");
 const resultPanel = document.querySelector("#result-panel");
@@ -93,7 +94,6 @@ function showQuestion() {
   factorAElement.textContent = String(a);
   factorBElement.textContent = String(b);
   answerInput.value = "";
-  answerInput.focus({ preventScroll: true });
 }
 
 function startGame() {
@@ -112,6 +112,7 @@ function startGame() {
   startButton.hidden = true;
   resultPanel.hidden = true;
   answerInput.disabled = false;
+  keypad.querySelectorAll("button").forEach((button) => { button.disabled = false; });
   submitButton.disabled = false;
   playerNameInput.disabled = true;
   messageElement.textContent = "Solve it, then hit enter.";
@@ -136,6 +137,7 @@ function finishGame() {
   resultTime.textContent = formatTime(elapsed, true);
   resultPanel.hidden = false;
   answerInput.disabled = true;
+  keypad.querySelectorAll("button").forEach((button) => { button.disabled = true; });
   submitButton.disabled = true;
   playerNameInput.disabled = false;
   startButton.textContent = "Play again";
@@ -169,7 +171,6 @@ answerForm.addEventListener("submit", (event) => {
   if (Number(answerInput.value) !== a * b) {
     messageElement.textContent = "Not quite — give it another try.";
     messageElement.className = "game-message is-wrong";
-    answerInput.select();
     return;
   }
 
@@ -183,6 +184,20 @@ answerForm.addEventListener("submit", (event) => {
   messageElement.textContent = "That's it! Keep going.";
   messageElement.className = "game-message is-correct";
   showQuestion();
+});
+
+keypad.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button || button.disabled || !isPlaying) return;
+
+  if (button.dataset.action === "backspace") {
+    answerInput.value = answerInput.value.slice(0, -1);
+    return;
+  }
+
+  if (button.dataset.digit !== undefined) {
+    answerInput.value += button.dataset.digit;
+  }
 });
 
 startButton.addEventListener("click", startGame);

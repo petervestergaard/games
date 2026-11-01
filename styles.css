@@ -188,41 +188,60 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .answer-form {
   display: flex;
-  width: min(100%, 290px);
+  width: min(100%, 256px);
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
-  margin-top: 21px;
+  margin-top: 12px;
 }
 .answer-form input {
   width: 100%;
   min-width: 0;
-  height: 52px;
-  padding: 0 15px;
+  height: 44px;
+  padding: 0 12px;
   border: 1px solid #e6e8df;
-  border-radius: 13px;
+  border-radius: 11px;
   outline: none;
   background: #fafaf6;
   color: var(--ink);
-  font-size: 16px;
+  font-family: "DM Mono", monospace;
+  font-size: 20px;
   text-align: center;
   transition: border-color .15s, box-shadow .15s;
 }
-.answer-form input:focus { border-color: #83a889; box-shadow: 0 0 0 3px rgba(117, 162, 120, .15); }
-.answer-form input::placeholder { color: #a5aaa1; font-size: 13px; }
+.answer-form input::placeholder { color: #a5aaa1; font-family: "DM Sans", sans-serif; font-size: 12px; }
 .answer-form input:disabled { display: none; }
-.submit-button {
+.keypad {
   display: grid;
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.keypad-key {
+  display: grid;
+  min-height: 39px;
   place-items: center;
-  border: 0;
-  border-radius: 13px;
+  border: 1px solid #e8e9e1;
+  border-radius: 10px;
+  background: #f7f7f1;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.keypad-key:active:not(:disabled) { transform: scale(.96); background: #e8eee4; }
+.keypad-key:disabled { opacity: .48; cursor: default; }
+.keypad-utility { color: #758078; font-size: 17px; }
+.keypad-enter {
+  border-color: var(--green);
   background: var(--green);
   color: white;
-  font-size: 23px;
-  cursor: pointer;
+  font-size: 21px;
 }
-.submit-button:disabled { display: none; }
+.keypad-enter:active:not(:disabled) { background: #194b3a; }
 .start-button {
   display: flex;
   min-height: 50px;
@@ -240,8 +259,8 @@ button { -webkit-tap-highlight-color: transparent; }
   cursor: pointer;
   transition: background .15s, transform .15s;
 }
-.start-button:hover, .submit-button:hover { background: #194b3a; }
-.start-button:active, .submit-button:active { transform: scale(.98); }
+.start-button:hover { background: #194b3a; }
+.start-button:active { transform: scale(.98); }
 .start-button[hidden], .result-panel[hidden] { display: none; }
 .result-panel {
   display: flex;
